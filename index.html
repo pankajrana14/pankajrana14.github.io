@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pankaj Rana – Robotics & AI Engineer. M.Sc. Mechanical Engineering (Mechatronics), University of Duisburg-Essen. Specializing in LiDAR perception, ROS2, C++, and deep learning.">
+  <title>Pankaj Rana – Robotics & AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0d1117;
+      --bg-card:     #161b22;
+      --bg-card2:    #1c2333;
+      --border:      #30363d;
+      --accent:      #00d4ff;
+      --accent-p:    #7c3aed;
+      --text:        #e6edf3;
+      --muted:       #8b949e;
+      --grad:        linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── Utilities ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .grad-text  { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section    { padding: 96px 0; }
+    .alt-bg     { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .sec-label  { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .sec-title  { font-size: clamp(26px, 4vw, 40px); font-weight: 800; margin-bottom: 56px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(13,17,23,.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(48,54,61,.5);
+      transition: border-color .3s;
+    }
+    .nav-logo {
+      font-size: 17px; font-weight: 800; text-decoration: none;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 13.5px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-right  { display: flex; align-items: center; gap: 14px; }
+
+    .lang-toggle { display: flex; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 3px; gap: 2px; }
+    .lang-btn {
+      padding: 4px 13px; border-radius: 16px; border: none;
+      background: transparent; color: var(--muted);
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      transition: all .2s; font-family: 'Inter', sans-serif;
+    }
+    .lang-btn.active { background: var(--grad); color: #fff; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 62px; left: 0; right: 0;
+      background: rgba(13,17,23,.97); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 28px; z-index: 999; flex-direction: column; gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text); text-decoration: none; font-size: 15px; font-weight: 500; padding: 10px 0; border-bottom: 1px solid rgba(48,54,61,.4); }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 90px 0 60px; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; top: -250px; right: -150px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,212,255,.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: ''; position: absolute; bottom: -150px; left: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,58,237,.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 64px; align-items: center; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,212,255,.08); border: 1px solid rgba(0,212,255,.25);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12.5px; color: var(--accent); font-weight: 600; margin-bottom: 22px;
+    }
+    .hero-tag-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+    .hero-name  { font-size: clamp(44px,6.5vw,76px); font-weight: 900; line-height: 1.05; margin-bottom: 14px; letter-spacing: -2px; }
+    .hero-role  { font-size: clamp(18px,2.8vw,26px); font-weight: 300; color: var(--muted); margin-bottom: 6px; }
+    .hero-sub   { font-size: 14px; color: var(--muted); margin-bottom: 38px; }
+
+    .hero-cta   { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+    .btn-pri {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; background: var(--grad); color: #fff;
+      text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;
+      border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: opacity .2s, transform .2s; white-space: nowrap;
+    }
+    .btn-pri:hover { opacity: .88; transform: translateY(-2px); }
+    .btn-out {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; background: transparent; color: var(--text);
+      text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;
+      border: 1px solid var(--border); cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all .2s; white-space: nowrap;
+    }
+    .btn-out:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-socials { display: flex; gap: 20px; flex-wrap: wrap; }
+    .soc-link {
+      display: flex; align-items: center; gap: 7px;
+      color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500;
+      transition: color .2s;
+    }
+    .soc-link:hover { color: var(--accent); }
+    .soc-link svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+    .hero-photo-wrap { position: relative; flex-shrink: 0; }
+    .hero-photo-wrap::before {
+      content: ''; position: absolute; inset: -3px;
+      background: var(--grad); border-radius: 50%; z-index: 0;
+    }
+    .hero-photo-wrap::after {
+      content: ''; position: absolute; inset: -18px;
+      border: 1px solid rgba(0,212,255,.15); border-radius: 50%; z-index: 0;
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .hero-photo {
+      width: 230px; height: 230px; border-radius: 50%;
+      object-fit: cover; object-position: top center;
+      position: relative; z-index: 1;
+      border: 4px solid var(--bg);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; }
+    .about-text p { color: var(--muted); font-size: 15.5px; line-height: 1.85; margin-bottom: 18px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; }
+    .stat-num  { font-size: 30px; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -1px; }
+    .stat-lbl  { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+    .about-right { display: flex; flex-direction: column; gap: 14px; }
+    .info-row { display: flex; align-items: center; gap: 11px; color: var(--muted); font-size: 13.5px; }
+    .info-row svg { color: var(--accent); flex-shrink: 0; width: 17px; height: 17px; }
+
+    .about-gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px; }
+    .about-gallery figure { margin: 0; }
+    .about-gallery img { width: 100%; height: 240px; object-fit: contain; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); display: block; }
+    .about-gallery figcaption { font-size: 11px; color: var(--muted); text-align: center; margin-top: 7px; line-height: 1.5; }
+    .about-gallery figcaption a { color: var(--accent); text-decoration: none; }
+    .about-gallery figcaption a:hover { text-decoration: underline; }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 10px; bottom: 40px;
+      width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent-p), transparent);
+    }
+    .tl-item { position: relative; margin-bottom: 40px; }
+    .tl-item::before {
+      content: ''; position: absolute; left: -34px; top: 10px;
+      width: 12px; height: 12px; background: var(--accent); border-radius: 50%;
+      border: 2px solid var(--bg); box-shadow: 0 0 10px rgba(0,212,255,.5);
+    }
+    .tl-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 22px;
+      transition: border-color .3s, transform .3s;
+    }
+    .tl-card:hover { border-color: rgba(0,212,255,.3); transform: translateX(4px); }
+    .tl-period  { font-size: 11.5px; color: var(--accent); font-weight: 700; letter-spacing: .5px; margin-bottom: 5px; }
+    .tl-role    { font-size: 16.5px; font-weight: 700; margin-bottom: 3px; }
+    .tl-company { font-size: 13.5px; color: var(--muted); margin-bottom: 3px; }
+    .tl-project { font-size: 12.5px; color: var(--accent-p); font-style: italic; margin-bottom: 14px; }
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .tl-bullets li { font-size: 13.5px; color: var(--muted); padding-left: 15px; position: relative; line-height: 1.65; }
+    .tl-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 3px; }
+
+    /* ── PROJECTS ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 22px; }
+    .proj-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; transition: border-color .3s, transform .3s;
+    }
+    .proj-card:hover { border-color: rgba(0,212,255,.3); transform: translateY(-5px); }
+    .proj-video { width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #000; display: block; }
+    video:-webkit-full-screen { object-fit: contain !important; background: #000 !important; }
+    video:-moz-full-screen    { object-fit: contain !important; background: #000 !important; }
+    video:fullscreen           { object-fit: contain !important; background: #000 !important; }
+    .proj-info  { padding: 18px 20px; }
+    .proj-tag   {
+      display: inline-block; padding: 3px 10px;
+      background: rgba(0,212,255,.08); border: 1px solid rgba(0,212,255,.2);
+      border-radius: 10px; font-size: 10.5px; font-weight: 700;
+      color: var(--accent); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 9px;
+    }
+    .proj-title { font-size: 15.5px; font-weight: 700; margin-bottom: 7px; }
+    .proj-desc  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 18px; }
+    .sk-cat { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 22px; transition: border-color .3s; }
+    .sk-cat:hover { border-color: rgba(0,212,255,.2); }
+    .sk-cat-title {
+      font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .sk-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .sk-tag {
+      padding: 5px 11px; background: rgba(255,255,255,.04);
+      border: 1px solid var(--border); border-radius: 6px;
+      font-size: 12.5px; color: var(--text); font-weight: 500; transition: all .2s;
+    }
+    .sk-tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,.05); }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 22px; }
+    .edu-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 26px; transition: border-color .3s; }
+    .edu-card:hover { border-color: rgba(0,212,255,.3); }
+    .edu-degree { font-size: 16.5px; font-weight: 700; margin-bottom: 4px; }
+    .edu-uni    { font-size: 13.5px; color: var(--accent); font-weight: 600; margin-bottom: 3px; }
+    .edu-period { font-size: 11.5px; color: var(--muted); margin-bottom: 14px; }
+    .edu-field  { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 12px; }
+    .edu-li     { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .edu-li li  { font-size: 13px; color: var(--muted); padding-left: 13px; position: relative; }
+    .edu-li li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-p); font-size: 10px; top: 4px; }
+    .edu-grade  {
+      margin-top: 14px; display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px; background: rgba(124,58,237,.1); border: 1px solid rgba(124,58,237,.3);
+      border-radius: 10px; font-size: 12.5px; color: var(--accent-p); font-weight: 700;
+    }
+
+    /* ── DOWNLOADS ── */
+    .dl-section-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 48px; }
+    .dl-group h3 { font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .dl-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 15px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); text-decoration: none;
+      font-size: 13.5px; font-weight: 500; transition: all .2s; margin-bottom: 8px; width: 100%;
+    }
+    .dl-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,.04); }
+    .dl-btn svg { flex-shrink: 0; }
+    .dl-flag { font-size: 11px; margin-left: auto; padding: 2px 7px; border-radius: 6px; font-weight: 700; }
+    .flag-en { background: rgba(0,212,255,.1); color: var(--accent); }
+    .flag-de { background: rgba(124,58,237,.1); color: var(--accent-p); }
+
+    .thesis-row { border-top: 1px solid var(--border); padding-top: 32px; }
+    .thesis-row h3 { font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .thesis-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: start; }
+    .contact-items { display: flex; flex-direction: column; gap: 18px; }
+    .c-item  { display: flex; align-items: center; gap: 14px; }
+    .c-icon  {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(0,212,255,.08); border: 1px solid rgba(0,212,255,.2);
+      display: flex; align-items: center; justify-content: center; color: var(--accent);
+    }
+    .c-lbl   { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 700; }
+    .c-val   { font-size: 14.5px; color: var(--text); font-weight: 500; }
+    .c-val a { color: inherit; text-decoration: none; transition: color .2s; }
+    .c-val a:hover { color: var(--accent); }
+
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 28px 0; text-align: center; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+      .hero-photo-wrap { order: -1; margin: 0 auto; }
+      .hero-cta { justify-content: center; }
+      .hero-socials { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-gallery { grid-template-columns: 1fr; }
+      .proj-grid  { grid-template-columns: 1fr; }
+      .edu-grid   { grid-template-columns: 1fr; }
+      .dl-section-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-stats { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 480px) {
+      .hero-photo { width: 170px; height: 170px; }
+      .thesis-btns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Pankaj Rana</a>
+  <ul class="nav-links">
+    <li><a href="#about"      data-i18n="nav_about">About</a></li>
+    <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+    <li><a href="#projects"   data-i18n="nav_proj">Projects</a></li>
+    <li><a href="#skills"     data-i18n="nav_skills">Skills</a></li>
+    <li><a href="#education"  data-i18n="nav_edu">Education</a></li>
+    <li><a href="#downloads"  data-i18n="nav_dl">Downloads</a></li>
+    <li><a href="#contact"    data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        onclick="setLang('de')">DE</button>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"      onclick="closeMenu()" data-i18n="nav_about">About</a>
+  <a href="#experience" onclick="closeMenu()" data-i18n="nav_exp">Experience</a>
+  <a href="#projects"   onclick="closeMenu()" data-i18n="nav_proj">Projects</a>
+  <a href="#skills"     onclick="closeMenu()" data-i18n="nav_skills">Skills</a>
+  <a href="#education"  onclick="closeMenu()" data-i18n="nav_edu">Education</a>
+  <a href="#downloads"  onclick="closeMenu()" data-i18n="nav_dl">Downloads</a>
+  <a href="#contact"    onclick="closeMenu()" data-i18n="nav_contact">Contact</a>
+</div>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          <span data-i18n="hero_tag">Open to opportunities · Germany</span>
+        </div>
+        <h1 class="hero-name">Pankaj<br>Rana</h1>
+        <p class="hero-role grad-text" data-i18n="hero_role">Robotics &amp; AI Engineer</p>
+        <p class="hero-sub" data-i18n="hero_sub">M.Sc. Mechanical Engineering (Mechatronics) · University of Duisburg-Essen</p>
+        <div class="hero-cta">
+          <a href="#downloads" class="btn-pri">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            <span data-i18n="btn_resume">Download Resume</span>
+          </a>
+          <a href="#contact" class="btn-out">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            <span data-i18n="btn_contact">Get in Touch</span>
+          </a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://www.linkedin.com/in/pankajrana14/" target="_blank" class="soc-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://leetcode.com/u/pankyrana/" target="_blank" class="soc-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 00-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 00-1.209 2.104 5.35 5.35 0 00-.125.513 5.527 5.527 0 00.062 2.362 5.83 5.83 0 00.349 1.017 5.938 5.938 0 001.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 00-1.951-.003l-2.396 2.392a3.021 3.021 0 01-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 01.066-.523 2.545 2.545 0 01.619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 00-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l1.5-1.566a1.372 1.372 0 00-.051-1.943A1.378 1.378 0 0013.483 0zm-2.866 12.815a1.38 1.38 0 00-1.38 1.382 1.38 1.38 0 001.38 1.382H20.79a1.38 1.38 0 001.38-1.382 1.38 1.38 0 00-1.38-1.382z"/></svg>
+            LeetCode
+          </a>
+          <a href="mailto:pankajrana1418@gmail.com" class="soc-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            pankajrana1418@gmail.com
+          </a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="Photo.jpg" alt="Pankaj Rana" class="hero-photo" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section id="about" class="section alt-bg">
+  <div class="container">
+    <p class="sec-label" data-i18n="about_lbl">About</p>
+    <h2 class="sec-title" data-i18n="about_h">About Me</h2>
+    <div class="about-grid">
+      <div class="fade-up">
+        <div class="about-text">
+          <p data-i18n="about_p1">I am a Mechatronics engineer based in Rutesheim, Germany, with hands-on experience across robotics, embedded systems, and machine learning. My background spans software development at Porsche Engineering, AI research at ZSW Baden-Württemberg, and robotics work at the University of Duisburg-Essen — giving me a solid foundation across the full engineering stack.</p>
+          <p data-i18n="about_p2">I work comfortably in both hardware-close C++ environments and higher-level Python and ML frameworks. Whether building real-time control loops for automotive simulators, processing 3D LiDAR data in ROS2, or training deep learning models for perception tasks — I enjoy working at the point where software meets the physical world.</p>
+          <p data-i18n="about_p3">I am currently completing my M.Sc. in Mechanical Engineering (Mechatronics) at the University of Duisburg-Essen and actively looking for roles in robotics, computer vision, or machine learning engineering in Germany.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">4+</div>
+            <div class="stat-lbl" data-i18n="stat_exp">Yrs Engineering</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl" data-i18n="stat_roles">Industry Roles</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2.1</div>
+            <div class="stat-lbl" data-i18n="stat_grade">M.Sc. Grade</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl" data-i18n="stat_lang">Languages</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right fade-up">
+        <div class="info-row">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Rutesheim, Germany
+        </div>
+        <div class="info-row">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21L8.5 10.5a11 11 0 005 5l1.113-1.724a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 15.72V19a2 2 0 01-2 2H17C9.163 21 3 14.837 3 7V5z"/></svg>
+          +49 15783445366
+        </div>
+        <div class="info-row">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          pankajrana1418@gmail.com
+        </div>
+        <div class="info-row">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          <span data-i18n="about_visa">Indian National · Student Visa · Germany</span>
+        </div>
+        <div class="info-row">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span data-i18n="about_dob">Born 14 September 1996</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-gallery fade-up">
+      <figure>
+        <img src="WhatsApp Image 2026-02-04 at 12.13.22.jpeg" alt="ZSW NIR Camera Array" loading="lazy">
+        <figcaption>NIR Camera Array · ZSW Bat Detection Project</figcaption>
+      </figure>
+      <figure>
+        <img src="Picture2.jpg" alt="Cobotank Demonstrator" loading="lazy">
+        <figcaption>Cobotank Demonstrator · <a href="https://www.dst-org.de/en/cobotank-demonstrator-delivery" target="_blank" rel="noopener">Source: dst-org.de</a></figcaption>
+      </figure>
+      <figure>
+        <img src="Picture1.png" alt="Blackboard Plotter Components" loading="lazy">
+        <figcaption>Blackboard Plotter · University of Duisburg-Essen</figcaption>
+      </figure>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ EXPERIENCE ═══════════════════════════ -->
+<section id="experience" class="section">
+  <div class="container">
+    <p class="sec-label" data-i18n="exp_lbl">Career</p>
+    <h2 class="sec-title" data-i18n="exp_h">Professional Experience</h2>
+    <div class="timeline">
+
+      <!-- ZSW RA (current) -->
+      <div class="tl-item fade-up">
+        <div class="tl-card">
+          <div class="tl-period" style="display:flex;align-items:center;gap:8px;">
+            March 2026 – Present
+            <span style="display:inline-flex;align-items:center;gap:5px;padding:2px 9px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);border-radius:10px;font-size:10.5px;font-weight:700;color:var(--accent);">
+              <span style="width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s infinite;"></span>
+              <span data-i18n="e0_current">Current</span>
+            </span>
+          </div>
+          <div class="tl-role"    data-i18n="e0_role">Research Assistant</div>
+          <div class="tl-company">Zentrum für Sonnenenergie- und Wasserstoff-Forschung Baden-Württemberg (ZSW)</div>
+          <div class="tl-project" data-i18n="e0_proj">Software Development for Research Systems</div>
+          <ul class="tl-bullets">
+            <li data-i18n="e0_b1">Developing modular software components in Python and C++ for ongoing research and data-processing pipelines.</li>
+            <li data-i18n="e0_b2">Managing version control workflows and collaborative development using Git in a research software environment.</li>
+            <li data-i18n="e0_b3">Integrating individual modules into cohesive end-to-end systems, ensuring interface compatibility and clean architecture.</li>
+            <li data-i18n="e0_b4">Conducting integration and regression testing to verify system reliability and correctness across software components.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ZSW Thesis -->
+      <div class="tl-item fade-up">
+        <div class="tl-card">
+          <div class="tl-period">May 2025 – Feb. 2026</div>
+          <div class="tl-role"    data-i18n="e1_role">Master's Thesis Student</div>
+          <div class="tl-company">Zentrum für Sonnenenergie- und Wasserstoff-Forschung Baden-Württemberg (ZSW)</div>
+          <div class="tl-project" data-i18n="e1_proj">Real-time Bat Detection on Wind Turbines | 3D Object Detection with AI</div>
+          <ul class="tl-bullets">
+            <li data-i18n="e1_b1">Processed large-scale LiDAR recordings to extract temporally consistent 3D object trajectories using Kalman-based multi-object tracking.</li>
+            <li data-i18n="e1_b2">Developed supervised trajectory embedding models (TCN backbone with supervised contrastive learning) on synthetic motion datasets.</li>
+            <li data-i18n="e1_b3">Designed unsupervised autoencoder architectures for centroid-based trajectory representation learning.</li>
+            <li data-i18n="e1_b4">Implemented spatio-temporal BEV encodings and trained 3D U-Net models for voxel-wise occupancy prediction under extreme class imbalance.</li>
+            <li data-i18n="e1_b5">Evaluated models using IoU, precision, recall, F1-score, and latent space visualization (t-SNE).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Porsche -->
+      <div class="tl-item fade-up">
+        <div class="tl-card">
+          <div class="tl-period">Nov. 2024 – April 2025</div>
+          <div class="tl-role"    data-i18n="e2_role">Software Development Intern</div>
+          <div class="tl-company">Porsche Engineering Services</div>
+          <div class="tl-project" data-i18n="e2_proj">ADAS Training Simulator | Software Development &amp; Autonomous Driving</div>
+          <ul class="tl-bullets">
+            <li data-i18n="e2_b1">Developed a Windows application in C++ to control the steering wheel, seat actuator, and hardware components of the ADAS training simulator.</li>
+            <li data-i18n="e2_b2">Implemented real-time control loops from the CARLA simulation environment, integrated with ES Mini and OpenScenario for scenario definition.</li>
+            <li data-i18n="e2_b3">Worked in an agile development environment following Scrum and Kanban methodologies.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- UDE RA -->
+      <div class="tl-item fade-up">
+        <div class="tl-card">
+          <div class="tl-period">Aug. 2024 – Feb. 2026</div>
+          <div class="tl-role"    data-i18n="e3_role">Research Assistant – Computer Science &amp; Programming</div>
+          <div class="tl-company">Chair of Dynamics and Control (SRS), University of Duisburg-Essen</div>
+          <ul class="tl-bullets">
+            <li data-i18n="e3_b1">Conceptualized and developed programming exercises in Data Structures and Algorithms (DSA) in Python.</li>
+            <li data-i18n="e3_b2">Designed and executed pytest test frameworks to validate algorithmic solutions and ensure correctness across diverse edge cases.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DST -->
+      <div class="tl-item fade-up">
+        <div class="tl-card">
+          <div class="tl-period">June 2024 – Sept. 2024</div>
+          <div class="tl-role"    data-i18n="e4_role">Research Assistant – Robotics</div>
+          <div class="tl-company">DST – Development Center for Ship Technology and Transport Systems e.V.</div>
+          <div class="tl-project" data-i18n="e4_proj">Cobotank | Robotics</div>
+          <ul class="tl-bullets">
+            <li data-i18n="e4_b1">Implemented coordinate transformations from the AprilTag system to the robot base frame in ROS2 using C++ and Python.</li>
+            <li data-i18n="e4_b2">Created and optimized the Octomap and integrated the camera model with the Cobotank model for 3D environment perception.</li>
+            <li data-i18n="e4_b3">Conducted system debugging, error diagnosis, and version control management with Git.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PROJECTS ═══════════════════════════ -->
+<section id="projects" class="section alt-bg">
+  <div class="container">
+    <p class="sec-label" data-i18n="proj_lbl">Work</p>
+    <h2 class="sec-title" data-i18n="proj_h">Projects &amp; Demos</h2>
+    <div class="proj-grid">
+
+      <div class="proj-card fade-up">
+        <video class="proj-video" controls preload="metadata">
+          <source src="IMG_8861.mp4" type="video/mp4">
+        </video>
+        <div class="proj-info">
+          <div class="proj-tag" data-i18n="p1_tag">Master's Thesis · ZSW</div>
+          <div class="proj-title" data-i18n="p1_title">Real-Time Bat Detection System</div>
+          <p class="proj-desc" data-i18n="p1_desc">Live demonstration of the bat detection pipeline using a multi-sensor array of LiDAR and NIR cameras. A drone simulates bat flight paths to generate a synthetic training dataset for the AI detection model deployed at wind turbines.</p>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up">
+        <video class="proj-video" controls preload="metadata">
+          <source src="Media1.mp4" type="video/mp4">
+        </video>
+        <div class="proj-info">
+          <div class="proj-tag" data-i18n="p2_tag">Internship · Porsche Engineering</div>
+          <div class="proj-title" data-i18n="p2_title">ADAS Training Simulator</div>
+          <p class="proj-desc" data-i18n="p2_desc">C++ Windows application driving the ADAS training simulator hardware — steering wheel, seat actuator, and motion platform — controlled by real-time feedback from the CARLA autonomous driving simulation environment.</p>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up">
+        <video class="proj-video" controls preload="metadata">
+          <source src="Media2.mp4" type="video/mp4">
+        </video>
+        <div class="proj-info">
+          <div class="proj-tag" data-i18n="p3_tag">University Project · UDE</div>
+          <div class="proj-title" data-i18n="p3_title">Blackboard Plotter – Unit Testing</div>
+          <p class="proj-desc" data-i18n="p3_desc">Unit testing session for the cable-driven blackboard plotter at University of Duisburg-Essen, validating motion algorithms, motor calibration routines, and error handling across edge cases.</p>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up">
+        <video class="proj-video" controls preload="metadata">
+          <source src="Media3.mp4" type="video/mp4">
+        </video>
+        <div class="proj-info">
+          <div class="proj-tag" data-i18n="p4_tag">University Project · UDE</div>
+          <div class="proj-title" data-i18n="p4_title">Blackboard Plotter – Working Prototype</div>
+          <p class="proj-desc" data-i18n="p4_desc">The fully functional prototype of the ESP32-controlled cable-driven blackboard plotter, demonstrating precise 2D motion control and path-planning algorithms implemented in embedded C++.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SKILLS ═══════════════════════════ -->
+<section id="skills" class="section">
+  <div class="container">
+    <p class="sec-label" data-i18n="sk_lbl">Expertise</p>
+    <h2 class="sec-title" data-i18n="sk_h">Skills</h2>
+    <div class="skills-grid">
+
+      <div class="sk-cat fade-up">
+        <div class="sk-cat-title" data-i18n="sk_prog">Programming Languages</div>
+        <div class="sk-tags">
+          <span class="sk-tag">C++</span>
+          <span class="sk-tag">Python</span>
+          <span class="sk-tag">Embedded C++</span>
+          <span class="sk-tag">Bash / Shell</span>
+        </div>
+      </div>
+
+      <div class="sk-cat fade-up">
+        <div class="sk-cat-title" data-i18n="sk_ml">Machine Learning &amp; AI</div>
+        <div class="sk-tags">
+          <span class="sk-tag">PyTorch</span>
+          <span class="sk-tag">TensorFlow</span>
+          <span class="sk-tag">Keras</span>
+          <span class="sk-tag">scikit-learn</span>
+          <span class="sk-tag">Open3D</span>
+          <span class="sk-tag">OpenCV</span>
+          <span class="sk-tag">PCL</span>
+          <span class="sk-tag">NumPy</span>
+          <span class="sk-tag">Matplotlib</span>
+          <span class="sk-tag">Jupyter</span>
+          <span class="sk-tag">Slurm</span>
+        </div>
+      </div>
+
+      <div class="sk-cat fade-up">
+        <div class="sk-cat-title" data-i18n="sk_rob">Robotics &amp; Perception</div>
+        <div class="sk-tags">
+          <span class="sk-tag">ROS2</span>
+          <span class="sk-tag">LiDAR</span>
+          <span class="sk-tag">NIR Cameras</span>
+          <span class="sk-tag">Sensor Fusion</span>
+          <span class="sk-tag">Point Cloud Processing</span>
+          <span class="sk-tag">Kalman Filtering</span>
+          <span class="sk-tag">ESP32</span>
+          <span class="sk-tag">Real-time Control</span>
+          <span class="sk-tag">CARLA</span>
+          <span class="sk-tag">Gazebo</span>
+        </div>
+      </div>
+
+      <div class="sk-cat fade-up">
+        <div class="sk-cat-title" data-i18n="sk_tools">Tools &amp; Platforms</div>
+        <div class="sk-tags">
+          <span class="sk-tag">Linux</span>
+          <span class="sk-tag">Git / GitLab</span>
+          <span class="sk-tag">CMake</span>
+          <span class="sk-tag">Docker</span>
+          <span class="sk-tag">MATLAB</span>
+          <span class="sk-tag">Simulink</span>
+          <span class="sk-tag">Jira</span>
+          <span class="sk-tag">Confluence</span>
+          <span class="sk-tag">pytest</span>
+        </div>
+      </div>
+
+      <div class="sk-cat fade-up">
+        <div class="sk-cat-title" data-i18n="sk_meth">Development Methods</div>
+        <div class="sk-tags">
+          <span class="sk-tag">OOP</span>
+          <span class="sk-tag">Agile / Scrum</span>
+          <span class="sk-tag">Kanban</span>
+          <span class="sk-tag">V-Model</span>
+          <span class="sk-tag">Unit Testing</span>
+          <span class="sk-tag">Debugging</span>
+          <span class="sk-tag">Performance Optimization</span>
+        </div>
+      </div>
+
+      <div class="sk-cat fade-up">
+        <div class="sk-cat-title" data-i18n="sk_lang">Languages</div>
+        <div class="sk-tags">
+          <span class="sk-tag">English (C2 – Fluent)</span>
+          <span class="sk-tag">German (B2)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ EDUCATION ═══════════════════════════ -->
+<section id="education" class="section alt-bg">
+  <div class="container">
+    <p class="sec-label" data-i18n="edu_lbl">Background</p>
+    <h2 class="sec-title" data-i18n="edu_h">Education</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card fade-up">
+        <div class="edu-degree" data-i18n="edu1_deg">Master of Science (M.Sc.)</div>
+        <div class="edu-uni">University of Duisburg-Essen, Germany</div>
+        <div class="edu-period">April 2022 – Present</div>
+        <div class="edu-field" data-i18n="edu1_field">Mechanical Engineering · Specialization in Mechatronics</div>
+        <ul class="edu-li">
+          <li data-i18n="edu1_b1">Machine Learning &amp; Artificial Intelligence</li>
+          <li data-i18n="edu1_b2">Embedded Systems &amp; Control Engineering</li>
+          <li data-i18n="edu1_b3">Sensors &amp; Actuators</li>
+          <li data-i18n="edu1_b4">Robotics &amp; Programming in C/C++</li>
+        </ul>
+        <div class="edu-grade" data-i18n="edu1_grade">Current Grade: 2.1</div>
+      </div>
+
+      <div class="edu-card fade-up">
+        <div class="edu-degree" data-i18n="edu2_deg">Bachelor of Engineering (B.E.)</div>
+        <div class="edu-uni">Panjab University, India</div>
+        <div class="edu-period">Aug. 2016 – July 2020</div>
+        <div class="edu-field" data-i18n="edu2_field">Mechanical Engineering</div>
+        <ul class="edu-li">
+          <li data-i18n="edu2_b1">Control Systems &amp; Programming Fundamentals</li>
+          <li data-i18n="edu2_b2">Thermodynamics &amp; Fluid Mechanics</li>
+        </ul>
+        <div class="edu-grade" data-i18n="edu2_grade">Final Grade: 2.25</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DOWNLOADS ═══════════════════════════ -->
+<section id="downloads" class="section">
+  <div class="container">
+    <p class="sec-label" data-i18n="dl_lbl">Download</p>
+    <h2 class="sec-title" data-i18n="dl_h">Resumes &amp; Thesis</h2>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;">
+      <a href="Resume_ComputerVision.pdf" download class="dl-btn" style="width:auto;">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span data-i18n="dl_resume_en">Resume (English)</span>
+      </a>
+      <a href="Lebenslauf_ComputerVision.pdf" download class="dl-btn" style="width:auto;">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span data-i18n="dl_resume_de">Lebenslauf (Deutsch)</span>
+      </a>
+    </div>
+
+    <div class="thesis-row">
+      <h3 data-i18n="dl_thesis">Master's Thesis</h3>
+      <div class="thesis-btns">
+        <a href="Masters_Thesis_Documentation (4).pdf" download class="dl-btn" style="width:auto;">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span data-i18n="dl_thesis_doc">Thesis Documentation (PDF)</span>
+        </a>
+        <a href="MTP_Presentation_v2.pdf" download class="dl-btn" style="width:auto;">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span data-i18n="dl_thesis_pres">Thesis Presentation (PDF)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section id="contact" class="section alt-bg">
+  <div class="container">
+    <p class="sec-label" data-i18n="ct_lbl">Let's Talk</p>
+    <h2 class="sec-title" data-i18n="ct_h">Get in Touch</h2>
+    <div class="contact-grid">
+
+      <div class="contact-items fade-up">
+        <div class="c-item">
+          <div class="c-icon"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></div>
+          <div>
+            <div class="c-lbl" data-i18n="ct_email_lbl">Email</div>
+            <div class="c-val"><a href="mailto:pankajrana1418@gmail.com">pankajrana1418@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21L8.5 10.5a11 11 0 005 5l1.113-1.724a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 15.72V19a2 2 0 01-2 2H17C9.163 21 3 14.837 3 7V5z"/></svg></div>
+          <div>
+            <div class="c-lbl" data-i18n="ct_phone_lbl">Phone</div>
+            <div class="c-val"><a href="tel:+4915783445366">+49 15783445366</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <div class="c-lbl" data-i18n="ct_loc_lbl">Location</div>
+            <div class="c-val">Rutesheim, Germany</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon" style="background:rgba(10,102,194,.1);border-color:rgba(10,102,194,.3);color:#0a66c2;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="c-lbl">LinkedIn</div>
+            <div class="c-val"><a href="https://www.linkedin.com/in/pankajrana14/" target="_blank">linkedin.com/in/pankajrana14</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon" style="background:rgba(255,161,22,.1);border-color:rgba(255,161,22,.3);color:#FFA116;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 00-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 00-1.209 2.104 5.35 5.35 0 00-.125.513 5.527 5.527 0 00.062 2.362 5.83 5.83 0 00.349 1.017 5.938 5.938 0 001.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 00-1.951-.003l-2.396 2.392a3.021 3.021 0 01-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 01.066-.523 2.545 2.545 0 01.619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 00-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l1.5-1.566a1.372 1.372 0 00-.051-1.943A1.378 1.378 0 0013.483 0zm-2.866 12.815a1.38 1.38 0 00-1.38 1.382 1.38 1.38 0 001.38 1.382H20.79a1.38 1.38 0 001.38-1.382 1.38 1.38 0 00-1.38-1.382z"/></svg>
+          </div>
+          <div>
+            <div class="c-lbl">LeetCode</div>
+            <div class="c-val"><a href="https://leetcode.com/u/pankyrana/" target="_blank">leetcode.com/u/pankyrana</a></div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <div class="container">
+    <p>© 2026 Pankaj Rana &nbsp;·&nbsp; <span data-i18n="footer">Rutesheim, Germany</span> &nbsp;·&nbsp; <a href="mailto:pankajrana1418@gmail.com">pankajrana1418@gmail.com</a></p>
+  </div>
+</footer>
+
+<script>
+// ── Translations ──────────────────────────────────────────────────────────────
+const T = {
+  en: {
+    nav_about:"About", nav_exp:"Experience", nav_proj:"Projects",
+    nav_skills:"Skills", nav_edu:"Education", nav_dl:"Downloads", nav_contact:"Contact",
+    hero_tag:"Open to opportunities · Germany",
+    hero_role:"Robotics & AI Engineer",
+    hero_sub:"M.Sc. Mechanical Engineering (Mechatronics) · University of Duisburg-Essen",
+    btn_resume:"Download Resume", btn_contact:"Get in Touch",
+    about_lbl:"About", about_h:"About Me",
+    about_p1:"I am a Mechatronics engineer based in Rutesheim, Germany, with hands-on experience across robotics, embedded systems, and machine learning. My background spans software development at Porsche Engineering, AI research at ZSW Baden-Württemberg, and robotics work at the University of Duisburg-Essen — giving me a solid foundation across the full engineering stack.",
+    about_p2:"I work comfortably in both hardware-close C++ environments and higher-level Python and ML frameworks. Whether building real-time control loops for automotive simulators, processing 3D LiDAR data in ROS2, or training deep learning models for perception tasks — I enjoy working at the point where software meets the physical world.",
+    about_p3:"I am currently completing my M.Sc. in Mechanical Engineering (Mechatronics) at the University of Duisburg-Essen and actively looking for roles in robotics, computer vision, or machine learning engineering in Germany.",
+    stat_exp:"Yrs Engineering", stat_roles:"Industry Roles", stat_grade:"M.Sc. Grade", stat_lang:"Languages",
+    about_visa:"Indian National · Student Visa · Germany",
+    about_dob:"Born 14 September 1996",
+    exp_lbl:"Career", exp_h:"Professional Experience",
+    e0_current:"Current",
+    e0_role:"Research Assistant",
+    e0_proj:"Software Development for Research Systems",
+    e0_b1:"Developing modular software components in Python and C++ for ongoing research and data-processing pipelines.",
+    e0_b2:"Managing version control workflows and collaborative development using Git in a research software environment.",
+    e0_b3:"Integrating individual modules into cohesive end-to-end systems, ensuring interface compatibility and clean architecture.",
+    e0_b4:"Conducting integration and regression testing to verify system reliability and correctness across software components.",
+    e1_role:"Master's Thesis Student",
+    e1_proj:"Real-time Bat Detection on Wind Turbines | 3D Object Detection with AI",
+    e1_b1:"Processed large-scale LiDAR recordings to extract temporally consistent 3D object trajectories using Kalman-based multi-object tracking.",
+    e1_b2:"Developed supervised trajectory embedding models (TCN backbone with supervised contrastive learning) on synthetic motion datasets.",
+    e1_b3:"Designed unsupervised autoencoder architectures for centroid-based trajectory representation learning.",
+    e1_b4:"Implemented spatio-temporal BEV encodings and trained 3D U-Net models for voxel-wise occupancy prediction under extreme class imbalance.",
+    e1_b5:"Evaluated models using IoU, precision, recall, F1-score, and latent space visualization (t-SNE).",
+    e2_role:"Software Development Intern",
+    e2_proj:"ADAS Training Simulator | Software Development & Autonomous Driving",
+    e2_b1:"Developed a Windows application in C++ to control the steering wheel, seat actuator, and hardware components of the ADAS training simulator.",
+    e2_b2:"Implemented real-time control loops from the CARLA simulation environment, integrated with ES Mini and OpenScenario for scenario definition.",
+    e2_b3:"Worked in an agile development environment following Scrum and Kanban methodologies.",
+    e3_role:"Research Assistant – Computer Science & Programming",
+    e3_b1:"Conceptualized and developed programming exercises in Data Structures and Algorithms (DSA) in Python.",
+    e3_b2:"Designed and executed pytest test frameworks to validate algorithmic solutions and ensure correctness across diverse edge cases.",
+    e4_role:"Research Assistant – Robotics",
+    e4_proj:"Cobotank | Robotics",
+    e4_b1:"Implemented coordinate transformations from the AprilTag system to the robot base frame in ROS2 using C++ and Python.",
+    e4_b2:"Created and optimized the Octomap and integrated the camera model with the Cobotank model for 3D environment perception.",
+    e4_b3:"Conducted system debugging, error diagnosis, and version control management with Git.",
+    proj_lbl:"Work", proj_h:"Projects & Demos",
+    p1_tag:"Master's Thesis · ZSW",
+    p1_title:"Real-Time Bat Detection System",
+    p1_desc:"Live demonstration of the bat detection pipeline using a multi-sensor array of LiDAR and NIR cameras. A drone simulates bat flight paths to generate a synthetic training dataset for the AI detection model deployed at wind turbines.",
+    p2_tag:"Internship · Porsche Engineering",
+    p2_title:"ADAS Training Simulator",
+    p2_desc:"C++ Windows application driving the ADAS training simulator hardware — steering wheel, seat actuator, and motion platform — controlled by real-time feedback from the CARLA autonomous driving simulation environment.",
+    p3_tag:"University Project · UDE",
+    p3_title:"Blackboard Plotter – Unit Testing",
+    p3_desc:"Unit testing session for the cable-driven blackboard plotter at University of Duisburg-Essen, validating motion algorithms, motor calibration routines, and error handling across edge cases.",
+    p4_tag:"University Project · UDE",
+    p4_title:"Blackboard Plotter – Working Prototype",
+    p4_desc:"The fully functional prototype of the ESP32-controlled cable-driven blackboard plotter, demonstrating precise 2D motion control and path-planning algorithms implemented in embedded C++.",
+    sk_lbl:"Expertise", sk_h:"Skills",
+    sk_prog:"Programming Languages", sk_ml:"Machine Learning & AI",
+    sk_rob:"Robotics & Perception", sk_tools:"Tools & Platforms",
+    sk_meth:"Development Methods", sk_lang:"Languages",
+    edu_lbl:"Background", edu_h:"Education",
+    edu1_deg:"Master of Science (M.Sc.)",
+    edu1_field:"Mechanical Engineering · Specialization in Mechatronics",
+    edu1_b1:"Machine Learning & Artificial Intelligence",
+    edu1_b2:"Embedded Systems & Control Engineering",
+    edu1_b3:"Sensors & Actuators",
+    edu1_b4:"Robotics & Programming in C/C++",
+    edu1_grade:"Current Grade: 2.1",
+    edu2_deg:"Bachelor of Engineering (B.E.)",
+    edu2_field:"Mechanical Engineering",
+    edu2_b1:"Control Systems & Programming Fundamentals",
+    edu2_b2:"Thermodynamics & Fluid Mechanics",
+    edu2_grade:"Final Grade: 2.25",
+    dl_lbl:"Download", dl_h:"Resume & Thesis",
+    dl_resume_en:"Resume (English)", dl_resume_de:"Lebenslauf (Deutsch)",
+    dl_thesis:"Master's Thesis",
+    dl_thesis_doc:"Thesis Documentation (PDF)",
+    dl_thesis_pres:"Thesis Presentation (PPTX)",
+    ct_lbl:"Let's Talk", ct_h:"Get in Touch",
+    ct_email_lbl:"Email", ct_phone_lbl:"Phone", ct_loc_lbl:"Location",
+    footer:"Rutesheim, Germany"
+  },
+  de: {
+    nav_about:"Über mich", nav_exp:"Erfahrung", nav_proj:"Projekte",
+    nav_skills:"Kompetenzen", nav_edu:"Ausbildung", nav_dl:"Downloads", nav_contact:"Kontakt",
+    hero_tag:"Offen für Stellenangebote · Deutschland",
+    hero_role:"Robotik & KI Ingenieur",
+    hero_sub:"M.Sc. Maschinenbau (Mechatronik) · Universität Duisburg-Essen",
+    btn_resume:"Lebenslauf herunterladen", btn_contact:"Kontakt aufnehmen",
+    about_lbl:"Über mich", about_h:"Über mich",
+    about_p1:"Ich bin Mechatronik-Ingenieur aus Rutesheim, Deutschland, mit praktischer Erfahrung in Robotik, Embedded Systems und maschinellem Lernen. Mein Hintergrund umfasst Softwareentwicklung bei Porsche Engineering, KI-Forschung am ZSW Baden-Württemberg und Robotikprojekte an der Universität Duisburg-Essen – was mir ein solides Fundament über den gesamten Engineering-Stack gegeben hat.",
+    about_p2:"Ich arbeite sowohl in hardwarenahen C++-Umgebungen als auch mit Python- und ML-Frameworks. Ob Echtzeit-Regelkreise für Fahrzeugsimulationen, 3D-LiDAR-Datenverarbeitung in ROS2 oder das Training von Deep-Learning-Modellen für Perception-Aufgaben – ich arbeite gerne dort, wo Software auf die physische Welt trifft.",
+    about_p3:"Ich schließe derzeit meinen M.Sc. Maschinenbau (Mechatronik) an der Universität Duisburg-Essen ab und suche aktiv nach Stellen in den Bereichen Robotik, Computer Vision oder Machine Learning Engineering in Deutschland.",
+    stat_exp:"Jahre Erfahrung", stat_roles:"Industriepositionen", stat_grade:"M.Sc. Note", stat_lang:"Sprachen",
+    about_visa:"Indischer Staatsbürger · Studierendenvisum · Deutschland",
+    about_dob:"Geboren am 14. September 1996",
+    exp_lbl:"Karriere", exp_h:"Berufliche Erfahrung",
+    e0_current:"Aktuell",
+    e0_role:"Wissenschaftliche Hilfskraft",
+    e0_proj:"Softwareentwicklung für Forschungssysteme",
+    e0_b1:"Entwicklung modularer Softwarekomponenten in Python und C++ für laufende Forschungs- und Datenverarbeitungspipelines.",
+    e0_b2:"Verwaltung von Versionskontroll-Workflows und kollaborativer Entwicklung mit Git in einem Forschungsumfeld.",
+    e0_b3:"Integration einzelner Module zu kohärenten End-to-End-Systemen unter Sicherstellung von Schnittstellenkompatibilität und sauberer Architektur.",
+    e0_b4:"Durchführung von Integrations- und Regressionstests zur Überprüfung der Systemzuverlässigkeit und Korrektheit über alle Softwarekomponenten hinweg.",
+    e1_role:"Masterand",
+    e1_proj:"Echtzeit-Fledermauserkennung an Windkraftanlagen | 3D-Objekterkennung mit KI",
+    e1_b1:"Verarbeitung umfangreicher LiDAR-Aufzeichnungen zur Extraktion zeitlich konsistenter 3D-Objekttrajektorien mittels Kalman-basierter Multi-Object-Tracking-Verfahren.",
+    e1_b2:"Entwicklung überwachter Trajektorien-Embedding-Modelle (TCN-Backbone mit supervised contrastive learning) auf synthetischen Bewegungsdatensätzen.",
+    e1_b3:"Entwurf unüberwachter Autoencoder-Architekturen zur lernbasierten Repräsentation zentroidbasierter Trajektorien.",
+    e1_b4:"Implementierung spatio-temporaler BEV-Kodierungen und Training 3D-U-Net-basierter Modelle zur voxelweisen Occupancy-Vorhersage bei starkem Klassenungleichgewicht.",
+    e1_b5:"Quantitative Modellbewertung anhand von IoU, Precision, Recall, F1-Score sowie Latent-Space-Analyse mittels t-SNE.",
+    e2_role:"Softwareentwicklung Praktikant",
+    e2_proj:"ADAS Training Simulator | Softwareentwicklung und automatisiertes Fahren",
+    e2_b1:"Entwicklung einer Windows-Anwendung in C++ zur Steuerung von Lenkrad, Sitzaktuator und weiteren Hardwarekomponenten des ADAS-Trainingssimulators.",
+    e2_b2:"Implementierung von Echtzeit-Regelkreisen auf Basis von CARLA-Simulationsdaten, integriert mit ES Mini und OpenScenario.",
+    e2_b3:"Tätigkeit in einer agilen Entwicklungsumgebung mit Scrum und Kanban.",
+    e3_role:"Wissenschaftliche Hilfskraft – Informatik & Programmierung",
+    e3_b1:"Konzeption und Erstellung von Übungsaufgaben im Bereich Datenstrukturen und Algorithmen (DSA) in Python.",
+    e3_b2:"Entwicklung von pytest-Testframeworks zur Validierung algorithmischer Lösungen und Sicherstellung der Korrektheit bei Randfällen.",
+    e4_role:"Wissenschaftliche Hilfskraft – Robotik",
+    e4_proj:"Cobotank | Robotik",
+    e4_b1:"Umsetzung der Transformation vom AprilTag-Koordinatensystem zum Basissystem des Roboters in ROS2, implementiert in C++ und Python.",
+    e4_b2:"Erstellung und Optimierung der Oktomap sowie Kombination des Kameramodells mit dem Cobotank-Modell zur 3D-Umgebungswahrnehmung.",
+    e4_b3:"Durchführung von Fehlerdiagnosen und Verwaltung der Versionskontrolle mit Git.",
+    proj_lbl:"Projekte", proj_h:"Projekte & Demos",
+    p1_tag:"Masterarbeit · ZSW",
+    p1_title:"Echtzeit-Fledermauserkennungssystem",
+    p1_desc:"Live-Demonstration der Erkennungspipeline mit einem Multi-Sensor-Array aus LiDAR und NIR-Kameras. Eine Drohne simuliert Fledermausflugbahnen zur Erstellung eines synthetischen Trainingsdatensatzes für das an Windkraftanlagen eingesetzte KI-Modell.",
+    p2_tag:"Praktikum · Porsche Engineering",
+    p2_title:"ADAS Trainingssimulator",
+    p2_desc:"C++ Windows-Anwendung zur Steuerung der ADAS-Trainingssimulator-Hardware – Lenkrad, Sitzaktuator und Bewegungsplattform – gesteuert durch Echtzeit-Feedback aus der CARLA-Simulationsumgebung.",
+    p3_tag:"Universitätsprojekt · UDE",
+    p3_title:"Tafel-Seilplotter – Unit Testing",
+    p3_desc:"Unit-Testing-Session für den seilgetriebenen Tafel-Seilplotter an der Universität Duisburg-Essen zur Validierung von Bewegungsalgorithmen, Motorkalibrierung und Fehlerbehandlung bei Randfällen.",
+    p4_tag:"Universitätsprojekt · UDE",
+    p4_title:"Tafel-Seilplotter – Funktionsfähiger Prototyp",
+    p4_desc:"Der vollständig funktionsfähige Prototyp des ESP32-gesteuerten seilgetriebenen Tafel-Seilplotters zeigt präzise 2D-Bewegungssteuerung und Pfadplanungsalgorithmen in Embedded C++.",
+    sk_lbl:"Expertise", sk_h:"Kompetenzen",
+    sk_prog:"Programmiersprachen", sk_ml:"Machine Learning & KI",
+    sk_rob:"Robotik & Perception", sk_tools:"Tools & Plattformen",
+    sk_meth:"Entwicklungsmethoden", sk_lang:"Sprachen",
+    edu_lbl:"Hintergrund", edu_h:"Ausbildung",
+    edu1_deg:"Master of Science (M.Sc.)",
+    edu1_field:"Maschinenbau · Vertiefung Mechatronik",
+    edu1_b1:"Machine Learning & Künstliche Intelligenz",
+    edu1_b2:"Embedded Systems & Regelungstechnik",
+    edu1_b3:"Sensoren & Aktoren",
+    edu1_b4:"Robotik & Programmierung in C/C++",
+    edu1_grade:"Aktuelle Note: 2,1",
+    edu2_deg:"Bachelor of Engineering (B.E.)",
+    edu2_field:"Maschinenbau",
+    edu2_b1:"Regelungstechnik & Programmiergrundlagen",
+    edu2_b2:"Thermodynamik & Strömungslehre",
+    edu2_grade:"Abschlussnote: 2,25",
+    dl_lbl:"Download", dl_h:"Lebenslauf & Thesis",
+    dl_resume_en:"Resume (Englisch)", dl_resume_de:"Lebenslauf (Deutsch)",
+    dl_thesis:"Masterarbeit",
+    dl_thesis_doc:"Thesis Dokumentation (PDF)",
+    dl_thesis_pres:"Thesis Präsentation (PDF)",
+    ct_lbl:"Kontakt", ct_h:"Kontakt aufnehmen",
+    ct_email_lbl:"E-Mail", ct_phone_lbl:"Telefon", ct_loc_lbl:"Standort",
+    footer:"Rutesheim, Deutschland"
+  }
+};
+
+let lang = 'en';
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (T[l][k] !== undefined) el.textContent = T[l][k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+}
+
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('hamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+}
+
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((en, i) => {
+    if (en.isIntersecting) setTimeout(() => en.target.classList.add('visible'), i * 90);
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Navbar border on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').style.borderBottomColor =
+    window.scrollY > 20 ? 'rgba(48,54,61,.9)' : 'rgba(48,54,61,.5)';
+});
+</script>
+</body>
+</html>
