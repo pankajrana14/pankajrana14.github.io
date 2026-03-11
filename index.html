@@ -233,6 +233,21 @@
     .proj-title { font-size: 15.5px; font-weight: 700; margin-bottom: 7px; }
     .proj-desc  { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
+    /* ── Project image gallery ── */
+    .proj-gallery { position: relative; overflow: hidden; aspect-ratio: 16/9; background: var(--bg); cursor: pointer; outline: none; }
+    .proj-gallery:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+    .pg-inner { display: flex; transition: transform .45s ease-out; height: 100%; }
+    .pg-slide { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; background: var(--bg); display: block; }
+    .pg-dots { position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; pointer-events: none; }
+    .pg-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.22); cursor: pointer; transition: background .3s; pointer-events: all; border: none; padding: 0; appearance: none; flex-shrink: 0; }
+    .pg-dot.active { background: var(--accent); }
+    @media (prefers-reduced-motion: reduce) { .pg-inner { transition: none; } }
+    /* ── Wide (featured) project card ── */
+    .proj-card-wide { grid-column: 1 / -1; display: grid; grid-template-columns: 7fr 5fr; }
+    .proj-card-wide .proj-gallery { aspect-ratio: unset; min-height: 300px; }
+    .proj-card-wide .proj-info { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+    .proj-card.proj-card-wide:hover { transform: translateY(-3px); }
+
     /* ── SKILLS ── */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 18px; }
     .sk-cat { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 22px; transition: border-color .3s; }
@@ -319,6 +334,9 @@
       .about-grid { grid-template-columns: 1fr; gap: 36px; }
       .about-gallery { grid-template-columns: 1fr; }
       .proj-grid  { grid-template-columns: 1fr; }
+      .proj-card-wide { grid-template-columns: 1fr; }
+      .proj-card-wide .proj-gallery { aspect-ratio: 16/9; min-height: 0; }
+      .proj-card-wide .proj-info { padding: 18px 20px; }
       .edu-grid   { grid-template-columns: 1fr; }
       .dl-section-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -392,6 +410,10 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn
           </a>
+          <a href="https://github.com/pankajrana14" target="_blank" class="soc-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
           <a href="https://leetcode.com/u/pankyrana/" target="_blank" class="soc-link">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 00-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 00-1.209 2.104 5.35 5.35 0 00-.125.513 5.527 5.527 0 00.062 2.362 5.83 5.83 0 00.349 1.017 5.938 5.938 0 001.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 00-1.951-.003l-2.396 2.392a3.021 3.021 0 01-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 01.066-.523 2.545 2.545 0 01.619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 00-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l1.5-1.566a1.372 1.372 0 00-.051-1.943A1.378 1.378 0 0013.483 0zm-2.866 12.815a1.38 1.38 0 00-1.38 1.382 1.38 1.38 0 001.38 1.382H20.79a1.38 1.38 0 001.38-1.382 1.38 1.38 0 00-1.38-1.382z"/></svg>
             LeetCode
@@ -417,8 +439,8 @@
     <div class="about-grid">
       <div class="fade-up">
         <div class="about-text">
-          <p data-i18n="about_p1">I am a Mechatronics engineer based in Rutesheim, Germany, with hands-on experience across robotics, embedded systems, and machine learning. My background spans software development at Porsche Engineering, AI research at ZSW Baden-Württemberg, and robotics work at the University of Duisburg-Essen — giving me a solid foundation across the full engineering stack.</p>
-          <p data-i18n="about_p2">I work comfortably in both hardware-close C++ environments and higher-level Python and ML frameworks. Whether building real-time control loops for automotive simulators, processing 3D LiDAR data in ROS2, or training deep learning models for perception tasks — I enjoy working at the point where software meets the physical world.</p>
+          <p data-i18n="about_p1">I am a Mechatronics engineer based in Rutesheim, Germany, with hands-on experience across robotics, embedded systems, and machine learning. My background spans software development at Porsche Engineering, AI research at ZSW Baden-Württemberg, and robotics work at the University of Duisburg-Essen, giving me a solid foundation across the full engineering stack.</p>
+          <p data-i18n="about_p2">I work comfortably in both hardware-close C++ environments and higher-level Python and ML frameworks. Whether building real-time control loops for automotive simulators, processing 3D LiDAR data in ROS2, or training deep learning models for perception tasks. I enjoy working at the point where software meets the physical world.</p>
           <p data-i18n="about_p3">I am currently completing my M.Sc. in Mechanical Engineering (Mechatronics) at the University of Duisburg-Essen and actively looking for roles in robotics, computer vision, or machine learning engineering in Germany.</p>
         </div>
         <div class="about-stats">
@@ -600,7 +622,7 @@
         <div class="proj-info">
           <div class="proj-tag" data-i18n="p2_tag">Internship · Porsche Engineering</div>
           <div class="proj-title" data-i18n="p2_title">ADAS Training Simulator</div>
-          <p class="proj-desc" data-i18n="p2_desc">C++ Windows application driving the ADAS training simulator hardware — steering wheel, seat actuator, and motion platform — controlled by real-time feedback from the CARLA autonomous driving simulation environment.</p>
+          <p class="proj-desc" data-i18n="p2_desc">C++ Windows application driving the ADAS training simulator hardware (steering wheel, seat actuator, and motion platform), controlled by real-time feedback from the CARLA autonomous driving simulation environment.</p>
         </div>
       </div>
 
@@ -623,6 +645,28 @@
           <div class="proj-tag" data-i18n="p4_tag">University Project · UDE</div>
           <div class="proj-title" data-i18n="p4_title">Blackboard Plotter – Working Prototype</div>
           <p class="proj-desc" data-i18n="p4_desc">The fully functional prototype of the ESP32-controlled cable-driven blackboard plotter, demonstrating precise 2D motion control and path-planning algorithms implemented in embedded C++.</p>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up proj-card-wide">
+        <div class="proj-gallery" id="jaGallery" role="region" aria-label="AI Job Search Agent screenshots" tabindex="0">
+          <div class="pg-inner" id="jaPgInner">
+            <img src="ja_credentials.png" class="pg-slide" alt="Job Agent GUI – Credentials tab with API key and email configuration fields" loading="eager">
+            <img src="ja_config.png"      class="pg-slide" alt="Job Agent GUI – Configuration tab with country selection and scraping parameters" loading="lazy">
+            <img src="ja_run.png"         class="pg-slide" alt="Job Agent GUI – Run Pipeline tab with live console output" loading="lazy">
+            <img src="ja_email.png"       class="pg-slide" alt="Sample HTML email digest showing AI-scored job listings with match reasoning" loading="lazy">
+          </div>
+          <div class="pg-dots" id="jaPgDots" role="group" aria-label="Gallery navigation">
+            <button class="pg-dot active" aria-label="Slide 1: Credentials" aria-current="true"></button>
+            <button class="pg-dot" aria-label="Slide 2: Configuration" aria-current="false"></button>
+            <button class="pg-dot" aria-label="Slide 3: Run Pipeline" aria-current="false"></button>
+            <button class="pg-dot" aria-label="Slide 4: Email digest" aria-current="false"></button>
+          </div>
+        </div>
+        <div class="proj-info">
+          <a href="https://github.com/pankajrana14/job-agent" target="_blank" class="proj-tag" style="text-decoration:none;" data-i18n="p5_tag">Personal Project · Open Source ↗</a>
+          <div class="proj-title" data-i18n="p5_title">AI Job Search Agent</div>
+          <p class="proj-desc" data-i18n="p5_desc">Desktop GUI that automates job searches across LinkedIn, StepStone, and BA Jobbörse, scraping listings with Playwright, scoring each posting against a candidate profile with an LLM (GPT-4o / Claude / Gemini), and delivering a structured HTML digest email. Supports multi-country search, SHA-256 deduplication, and Windows Task Scheduler integration for fully automated twice-daily runs.</p>
         </div>
       </div>
 
@@ -654,6 +698,7 @@
           <span class="sk-tag">TensorFlow</span>
           <span class="sk-tag">Keras</span>
           <span class="sk-tag">scikit-learn</span>
+          <span class="sk-tag">LLM Integration</span>
           <span class="sk-tag">Open3D</span>
           <span class="sk-tag">OpenCV</span>
           <span class="sk-tag">PCL</span>
@@ -687,6 +732,10 @@
           <span class="sk-tag">Git / GitLab</span>
           <span class="sk-tag">CMake</span>
           <span class="sk-tag">Docker</span>
+          <span class="sk-tag">Playwright</span>
+          <span class="sk-tag">PySide6 · Qt</span>
+          <span class="sk-tag">REST APIs</span>
+          <span class="sk-tag">JSON</span>
           <span class="sk-tag">MATLAB</span>
           <span class="sk-tag">Simulink</span>
           <span class="sk-tag">Jira</span>
@@ -837,6 +886,15 @@
             <div class="c-val"><a href="https://leetcode.com/u/pankyrana/" target="_blank">leetcode.com/u/pankyrana</a></div>
           </div>
         </div>
+        <div class="c-item">
+          <div class="c-icon" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.15);color:var(--text);">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </div>
+          <div>
+            <div class="c-lbl">GitHub</div>
+            <div class="c-val"><a href="https://github.com/pankajrana14" target="_blank">github.com/pankajrana14</a></div>
+          </div>
+        </div>
       </div>
 
 
@@ -862,8 +920,8 @@ const T = {
     hero_sub:"M.Sc. Mechanical Engineering (Mechatronics) · University of Duisburg-Essen",
     btn_resume:"Download Resume", btn_contact:"Get in Touch",
     about_lbl:"About", about_h:"About Me",
-    about_p1:"I am a Mechatronics engineer based in Rutesheim, Germany, with hands-on experience across robotics, embedded systems, and machine learning. My background spans software development at Porsche Engineering, AI research at ZSW Baden-Württemberg, and robotics work at the University of Duisburg-Essen — giving me a solid foundation across the full engineering stack.",
-    about_p2:"I work comfortably in both hardware-close C++ environments and higher-level Python and ML frameworks. Whether building real-time control loops for automotive simulators, processing 3D LiDAR data in ROS2, or training deep learning models for perception tasks — I enjoy working at the point where software meets the physical world.",
+    about_p1:"I am a Mechatronics engineer based in Rutesheim, Germany, with hands-on experience across robotics, embedded systems, and machine learning. My background spans software development at Porsche Engineering, AI research at ZSW Baden-Württemberg, and robotics work at the University of Duisburg-Essen, giving me a solid foundation across the full engineering stack.",
+    about_p2:"I work comfortably in both hardware-close C++ environments and higher-level Python and ML frameworks. Whether building real-time control loops for automotive simulators, processing 3D LiDAR data in ROS2, or training deep learning models for perception tasks. I enjoy working at the point where software meets the physical world.",
     about_p3:"I am currently completing my M.Sc. in Mechanical Engineering (Mechatronics) at the University of Duisburg-Essen and actively looking for roles in robotics, computer vision, or machine learning engineering in Germany.",
     stat_exp:"Yrs Engineering", stat_roles:"Industry Roles", stat_grade:"M.Sc. Grade", stat_lang:"Languages",
     about_visa:"Indian National · Student Visa · Germany",
@@ -902,13 +960,16 @@ const T = {
     p1_desc:"Live demonstration of the bat detection pipeline using a multi-sensor array of LiDAR and NIR cameras. A drone simulates bat flight paths to generate a synthetic training dataset for the AI detection model deployed at wind turbines.",
     p2_tag:"Internship · Porsche Engineering",
     p2_title:"ADAS Training Simulator",
-    p2_desc:"C++ Windows application driving the ADAS training simulator hardware — steering wheel, seat actuator, and motion platform — controlled by real-time feedback from the CARLA autonomous driving simulation environment.",
+    p2_desc:"C++ Windows application driving the ADAS training simulator hardware (steering wheel, seat actuator, and motion platform), controlled by real-time feedback from the CARLA autonomous driving simulation environment.",
     p3_tag:"University Project · UDE",
     p3_title:"Blackboard Plotter – Unit Testing",
     p3_desc:"Unit testing session for the cable-driven blackboard plotter at University of Duisburg-Essen, validating motion algorithms, motor calibration routines, and error handling across edge cases.",
     p4_tag:"University Project · UDE",
     p4_title:"Blackboard Plotter – Working Prototype",
     p4_desc:"The fully functional prototype of the ESP32-controlled cable-driven blackboard plotter, demonstrating precise 2D motion control and path-planning algorithms implemented in embedded C++.",
+    p5_tag:"Personal Project · Open Source ↗",
+    p5_title:"AI Job Search Agent",
+    p5_desc:"Desktop GUI that automates job searches across LinkedIn, StepStone, and BA Jobbörse, scraping listings with Playwright, scoring each posting against a candidate profile with an LLM (GPT-4o / Claude / Gemini), and delivering a structured HTML digest email. Supports multi-country search, SHA-256 deduplication, and Windows Task Scheduler integration for fully automated twice-daily runs.",
     sk_lbl:"Expertise", sk_h:"Skills",
     sk_prog:"Programming Languages", sk_ml:"Machine Learning & AI",
     sk_rob:"Robotics & Perception", sk_tools:"Tools & Platforms",
@@ -990,6 +1051,9 @@ const T = {
     p4_tag:"Universitätsprojekt · UDE",
     p4_title:"Tafel-Seilplotter – Funktionsfähiger Prototyp",
     p4_desc:"Der vollständig funktionsfähige Prototyp des ESP32-gesteuerten seilgetriebenen Tafel-Seilplotters zeigt präzise 2D-Bewegungssteuerung und Pfadplanungsalgorithmen in Embedded C++.",
+    p5_tag:"Persönliches Projekt · Open Source ↗",
+    p5_title:"KI-Jobsuche-Agent",
+    p5_desc:"Desktop-GUI zur automatischen Jobsuche auf LinkedIn, StepStone und BA Jobbörse – mit Playwright zum Scrapen, LLM-Bewertung (GPT-4o / Claude / Gemini) jedes Inserats anhand eines Kandidatenprofils und HTML-Digest-E-Mail-Versand. Unterstützt Mehrländersuche, SHA-256-Deduplizierung und Windows-Task-Scheduler-Integration für vollautomatisierte zweimal täglich Läufe.",
     sk_lbl:"Expertise", sk_h:"Kompetenzen",
     sk_prog:"Programmiersprachen", sk_ml:"Machine Learning & KI",
     sk_rob:"Robotik & Perception", sk_tools:"Tools & Plattformen",
@@ -1055,6 +1119,58 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').style.borderBottomColor =
     window.scrollY > 20 ? 'rgba(48,54,61,.9)' : 'rgba(48,54,61,.5)';
+});
+
+// Image gallery carousel
+function pgTo(g, idx) {
+  g.idx = idx;
+  g.inner.style.transform = 'translateX(-' + (idx * 100) + '%)';
+  g.dots.forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+    d.setAttribute('aria-current', i === idx ? 'true' : 'false');
+  });
+}
+function pgNext(g) { pgTo(g, (g.idx + 1) % g.dots.length); }
+function pgPrev(g) { pgTo(g, (g.idx - 1 + g.dots.length) % g.dots.length); }
+
+const jaG = {
+  idx: 0,
+  inner: document.getElementById('jaPgInner'),
+  dots: [...document.querySelectorAll('#jaPgDots .pg-dot')]
+};
+
+// Dot clicks
+jaG.dots.forEach((d, i) => {
+  d.addEventListener('click', e => { e.stopPropagation(); pgTo(jaG, i); });
+});
+
+// Click/Enter on gallery advances slide
+const jaEl = document.getElementById('jaGallery');
+jaEl.addEventListener('click', () => pgNext(jaG));
+
+// Keyboard arrow navigation
+jaEl.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') { e.preventDefault(); pgNext(jaG); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); pgPrev(jaG); }
+});
+
+// Touch swipe
+(function() {
+  let tx = 0;
+  jaEl.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  jaEl.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) dx < 0 ? pgNext(jaG) : pgPrev(jaG);
+  }, { passive: true });
+})();
+
+// Auto-rotation: 5 s, pause on hover and when tab is hidden
+let jaTimer = setInterval(() => pgNext(jaG), 5000);
+jaEl.addEventListener('mouseenter', () => clearInterval(jaTimer));
+jaEl.addEventListener('mouseleave', () => { jaTimer = setInterval(() => pgNext(jaG), 5000); });
+document.addEventListener('visibilitychange', () => {
+  clearInterval(jaTimer);
+  if (!document.hidden) jaTimer = setInterval(() => pgNext(jaG), 5000);
 });
 </script>
 </body>
