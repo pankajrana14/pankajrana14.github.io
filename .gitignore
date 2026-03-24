@@ -18,3 +18,8 @@ out/
 # OS
 .DS_Store
 Thumbs.db
+
+# Resume files
+resume.html
+resume-ats.html
+resume-ats-de.html
